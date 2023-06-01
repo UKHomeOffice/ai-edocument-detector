@@ -25,7 +25,7 @@ threshold-analysis
 
 Common Structure
 =================
-We use two docker images which all our mini-projects share, so you only have to build it once.
+We use two docker images which all our mini-projects share. You only have to build them once.
 
 ```
 docker build -t ai-edocument-detector .
@@ -36,7 +36,7 @@ docker build -t ai-edocument-detector-js .
 
 We keep production training images outside of the github repository for obvious reasons. We expect two directories. One with edocuments and one for non-edocuments. Our scripts assume the environmental variables that point to those paths are provided.
 
-``
+```
 export AI_EDOCUMENT_DETECTOR_ROOT=$PWD       # where ever this repo is checked out to
 export TRAINING_SET_ROOT=/tmp/edocuments     # test images in two folders, edocuments and not-edocuments.
 export TRAINING_SET_DEMO_RECORDS=/tmp/demo-records  # expects a good.jpg and bad.jpg example files.
