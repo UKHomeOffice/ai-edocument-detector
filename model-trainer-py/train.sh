@@ -1,8 +1,3 @@
 #!/bin/bash
 
-# First command, build the docker image.
-
-# docker build -t tensorflow-edocument .
-
-# Second command, train the model
-docker run -it --rm -v $PWD:/tmp/app -v /home/phill/tmp/ai-edocument-detection/production-training-set/:/tmp/images -w /tmp -u 1000:1000 tensorflow-edocument python /tmp/app/train.py
+docker run -it --rm -v $AI_EDOCUMENT_DETECTOR_ROOT:/tmp/app -v $TRAINING_SET_ROOT:/tmp/images -w /tmp -u 1000:1000 ai-edocument-detector python /tmp/app/train.py

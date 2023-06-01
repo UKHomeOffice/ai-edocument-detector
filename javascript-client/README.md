@@ -1,14 +1,11 @@
 
 # Javascript Client
 
-This application runs in your browser and uses tensorflow-js. Upload an image and get a confidence score telling you if it's an edocument or not.
-
-A Dockerfile is provided with nodejs etc to help develop and test this sample Javascript app.
+This application runs in your browser and uses tensorflow-js. Upload an image and get a confidence score telling you if it's an edocument or not. Files are not saved.
 
 ```bash
-docker build -t ai-js-client-dev -f Dockerfile.build .  # this command only needs to be run once
 
-docker run -v "/home/phill/tmp/ai-edocument-detection/ai-edocument-detection/javascript-client/:/workspace" -it --net=host ai-js-client-dev /bin/bash
+docker run -v $AI_EDOCUMENT_DETECTOR_ROOT/javascript-client:/workspace" -it --net=host ai-edocument-detector-js /bin/bash
 
 ```
 

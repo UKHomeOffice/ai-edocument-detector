@@ -1,11 +1,9 @@
 
 # AI E-document detection demonstration
 
-The Home Office has numerous online services that request users upload images of their passports, such as Electronic Visa Waiver. For legal and policy reasons, we require a photo of the physical passport. Some countries, such as United Arab Emirates issue customers a "edocument" copy of their passport. However this is not a document we can accept.
+The Home Office has numerous online services that request users upload images of their passports, such as Electronic Visa Waiver. For legal and policy reasons, we require a photo of the physical passport. Some countries, such as United Arab Emirates issue customers a "edocument" copy of their passport. However this is not a document we can accept at the current time.
 
-This project aims to identify edocument images uploaded to our system so we can reduce delays and improve the customer experience, as well as reduce caseworking effort. It should also be mentioned that EVWs need to be purchased 48 hours before travelling and the edocument is issued before physical passports arrive, so as well as honest mistakes, some customers have made interesting edits to edocument images before they were uploaded.
-
-Therefore we are evaluating the use of AI to automatically detect edocuments. We use Tensorflow 2 to build our models.
+This project aims to identify edocument images uploaded to our system so we can reduce delays and improve the customer experience. Therefore we are evaluating the use of AI to automatically detect edocuments. We use Tensorflow 2 to build our models.
 
 # Projects
 
@@ -22,6 +20,29 @@ png-fixer
   * A not-very-noteworthy project used to identify and fix some png files and prepare our test training set.
   * Use `sbt run` for this Scala project although it isn't very useful outside of training set.
 
-Directory Structure
+threshold-analysis
+  * A simple script that allows us to collect the confidence scores from a large collection of images so we can set a programmatic threshold we are happy with.
+
+Common Structure
 =================
-Outside of the git repository we expect a production training set directory with two directories. `edocuments` and `notedocuments`. These directories should contain all the data we are training the system on.
+We use two docker images which all our mini-projects share, so you only have to build it once.
+
+```
+docker build -t ai-edocument-detector .
+
+cd javascript-client
+docker build -t ai-edocument-detector-js .
+```
+
+We keep production training images outside of the github repository for obvious reasons. We expect two directories. One with edocuments and one for non-edocuments. Our scripts assume the environmental variables that point to those paths are provided.
+
+``
+export AI_EDOCUMENT_DETECTOR_ROOT=$PWD       # where ever this repo is checked out to
+export TRAINING_SET_ROOT=/tmp/edocuments     # test images in two folders, edocuments and not-edocuments.
+export TRAINING_SET_DEMO_RECORDS=/tmp/demo-records  # expects a good.jpg and bad.jpg example files.
+export TRAINING_SET2_ROOT=/tmp/notedocuments
+export MODEL_PATH=/tmp/saved-model
+export MODEL_PATH_JS=/tmp/saved-model-js
+
+```
+
