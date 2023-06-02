@@ -16,10 +16,6 @@ python-client
 javascript-client
   * Our customer apps are written in Javascript therefore demonstrating the technology in the language we use is important. This visual website demo is used to explain to the business what the user interface would look like. This working MVP demo can also be hosted in our UAT environment where caseworkers can explore and evaluate it's effectiveness.
 
-png-fixer
-  * A not-very-noteworthy project used to identify and fix some png files and prepare our test training set.
-  * Use `sbt run` for this Scala project although it isn't very useful outside of training set.
-
 threshold-analysis
   * A simple script that allows us to collect the confidence scores from a large collection of images so we can set a programmatic threshold we are happy with.
 
