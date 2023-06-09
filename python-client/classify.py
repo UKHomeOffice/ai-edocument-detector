@@ -18,7 +18,7 @@ print("started %s" % tf.__version__)
 
 data_dir = pathlib.Path("/tmp/images")
 
-saved_model_path = '/tmp/app/saved-model'
+saved_model_path = '/tmp/model-path'
 model = tf.keras.models.load_model(saved_model_path)
 
 model.summary()
@@ -40,6 +40,10 @@ def classify(filepath):
         "image {} most likely belongs to {} with a {:.2f} percent confidence."
         .format(filepath, class_names[np.argmax(score)], 100 * np.max(score))
     )
+
+    print("raw index 0: " + str(predictions[0]));
+    print("raw index 00: " + str(predictions[0][0]));
+    print("raw index 01: " + str(predictions[0][1]));
 
 ## good demo record
 goodRecord = "/tmp/images/good.jpg"

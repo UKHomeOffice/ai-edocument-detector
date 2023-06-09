@@ -51,10 +51,6 @@ print(np.min(first_image), np.max(first_image))
 num_classes = len(class_names)
 
 model = Sequential([
-  #layers.Resizing(height, width, interpolation='bilinear', crop_to_aspect_ratio=False),
-  #layers.RandomFlip("horizontal", input_shape=(img_height, img_width, 3)),
-  #layers.RandomRotation(0.1),
-  #layers.RandomZoom(0.1),
   layers.Rescaling(1./255, input_shape=(img_height, img_width, 3)),
   layers.Conv2D(16, 3, padding='same', activation='relu'),
   layers.MaxPooling2D(),
@@ -81,16 +77,13 @@ history = model.fit(
 )
 
 # Now we have done the training export the model
-# to a file. This will be copied our scala http app
-# which can then accept images, take the trained data
-# and use it classification uploaded files.
+# to a file. This will be copied our client apps.
 
-saved_model_path = '/tmp/app/saved-model'
-#tf.saved_model.save(model, saved_model_path)
+saved_model_path = '/tmp/model-path'
 model.save(saved_model_path)
 
 import tensorflowjs as tfjs
-saved_model_js_path = '/tmp/app/saved-model-tfjs'
+saved_model_js_path = '/tmp/model-path-tfjs'
 tfjs.converters.save_keras_model(model, saved_model_js_path)
 
 print("finished")

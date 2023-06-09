@@ -12,12 +12,6 @@ async function classify(image) {
   edocumentConfidence = prediction[0];
   nonEDocumentConfidence = prediction[1];
 
-  //for (let i = 0; i < prediction.length; i++) {
-  //  results.push({ score: prediction[i], label: labels[i] });
-  //  alert("label: " + labels[i] + ": prediction=" + prediction[i]);
-  //}
-
-  //document.getElementById('micro-out-div').innerText = prediction;
   if (edocumentConfidence > nonEDocumentConfidence && edocumentConfidence > 1.0) {
     document.getElementById('micro-out-div').innerText = "This is an edocument! Confidence: " + edocumentConfidence;
     document.getElementById('micro-out-div').className = "edocument";
