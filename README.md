@@ -50,4 +50,5 @@ scala-client
 
 threshold-analysis
   * A simple python script that allows us to collect the confidence scores from a large collection of images so we can explore what happens at different thresholds.
+  * Run `./analyse-set.sh` when TRAINING_SET_ROOT points to a large directory of images.
 
