@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker run -it --rm -v $PWD:/tmp/app -v /home/phill/tmp/ai-edocument-detection/demo-records/:/tmp/images -w /tmp -u 1000:1000 tensorflow-edocument java -jar /tmp/app/target/scala-3.2.2/scala-client.jar
+docker run -it --rm -v "$AI_EDOCUMENT_DETECTOR_ROOT/scala-client:/tmp/app" -v "$TRAINING_SET_ROOT:/tmp/images" -v "$MODEL_PATH:/tmp/saved-model" -w /tmp -u 1000:1000 tensorflow-edocument java -jar /tmp/app/target/scala-3.2.2/scala-client.jar

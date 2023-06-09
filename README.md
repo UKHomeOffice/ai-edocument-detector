@@ -33,22 +33,21 @@ export TRAINING_SET_ROOT=/production/images                             # somewh
 model-trainer-py
   * This is a python project that uses Tensorflow to build an AI model. It expects TRAINING_SET_ROOT to point to a directory with two subdirectories inside. An "edocuments" directory and a "not-edocuments" directory. Using these two directories the AI will train a model to recognise the images inside.
   * To start the training, cd into the directory and run `./train.sh`
-  * When the program has finished it should have created a model at `$MODEL_PATH` and a Javascript encoded model at `$(MODEL_PATH_TSJS)`. These directories can be bundled with the clients so the can detect edocuments the system hasn't seen before in the future.
+  * When the program has finished it should have created a model at `$MODEL_PATH` and a Javascript encoded model at `$(MODEL_PATH_TSJS)`. These directories can be bundled with our clients.
 
 python-client
   * This project takes an image, classifies an image to show our AI in action on data it hasnt seen before.
   * To see the client in action, cd into the directory and run `./classify.sh`.
 
 javascript-client
-  * Our customer apps are written in Javascript therefore demonstrating the technology in the language we use is important. This visual website demo is used to explain to the business what the user interface would look like when customers are uploading their images. This is a working MVP demo can also be hosted in our UAT environment where internal decision makers can explore and evaluate its effectiveness.
-  * This app has it's own Dockerfile you need to build once. See the build instructions above.
-  * Start the image with `
+  * Our customer apps are written in Javascript therefore demonstrating the technology in the language we use is important. This visual website demo is used to explain to the business what the user interface would look like when customers are uploading their images. This working MVP demo can also be hosted in our UAT environment where internal decision makers can explore and evaluate the AI themselves.
+  * This app has it's own Dockerfile. Build instructions above.
+  * Start the image with `./demo.sh` and visit https://localhost:1234 in your browser.
 
 scala-client
-  * As our internal backend components are written in Scala, here we demonstrate the trained model being available from Scala.
+  * As our internal backend components are written in Scala this client is important to us.
+  * Start `./classify.sh`
 
 threshold-analysis
-  * A simple script that allows us to collect the confidence scores from a large collection of images so we can set a programmatic threshold we are happy with.
-
-
+  * A simple python script that allows us to collect the confidence scores from a large collection of images so we can explore what happens at different thresholds.
 

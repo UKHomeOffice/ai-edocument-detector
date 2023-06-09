@@ -1,8 +1,8 @@
 
-async function classify(image) {
+async function classify() {
 
   const labels = [ 'edocument', 'not-edocument' ];
-  const model = await tf.loadLayersModel('./saved-model-tfjs/model.json');
+  const model = await tf.loadLayersModel('/saved-model-tfjs/model.json');
   const imageX = tf.browser.fromPixels(document.getElementById('myCanvas'));
   const resizedImage = imageX.resizeBilinear([180,180]);
   const expanded = tf.expandDims(resizedImage, 0);
@@ -21,4 +21,3 @@ async function classify(image) {
   }
 }
 
-//run();

@@ -30,41 +30,46 @@ print("started %s" % tf.__version__)
 
 data_dir = pathlib.Path("/tmp/images")
 
-saved_model_path = '/tmp/app/saved-model'
+saved_model_path = '/tmp/saved-model'
 model = tf.keras.models.load_model(saved_model_path)
 
 model.summary()
 
 class_names = ['edocuments', 'not-edocuments']
 
+i = 0
+
 def classify(filepath):
-    print("classifying: " + filepath)
-    img = tf.keras.utils.load_img(
-        filepath, target_size=(img_height, img_width)
-    )
+    global i
+    skip = False
+    try:
+        img = tf.keras.utils.load_img(
+            filepath, target_size=(img_height, img_width)
+        )
+    except:
+        return ('err', 'err')
 
     img_array = tf.keras.utils.img_to_array(img)
     img_array = tf.expand_dims(img_array, 0) # Create a batch
 
     predictions = model.predict(img_array)
-    print("predictions dim: " + str(predictions.ndim))
-    print("predictions size: " + str(predictions.size))
-    print("predictions shape: " + str(predictions.shape))
-    print("predictions: " + str(predictions[0][0]) + " and " + str(predictions[0][1]))
+    print("%s, %s, %s, %s" % (
+        i,
+        filepath,
+        str(predictions[0][0]),
+        str(predictions[0][1])
+    ))
+    i = i + 1
     return (predictions[0][0], predictions[0][1])
 
 allResults = []
 
-os.chdir("/tmp/images/edocuments/")
+os.chdir("/tmp/images/")
 for filename in os.listdir():
-    (edocumentconfidence, notedocumentconfidence) = classify("/tmp/images/edocuments/" + filename)
+    (edocumentconfidence, notedocumentconfidence) = classify("/tmp/images/" + filename)
+    if (edocumentconfidence == 'err'):
+        continue
     te = TestEntry(filename, True, edocumentconfidence, notedocumentconfidence)
-    allResults.append(te)
-
-os.chdir("/tmp/images/notedocuments/")
-for filename in os.listdir():
-    (edocumentconfidence, notedocumentconfidence) = classify("/tmp/images/notedocuments/" + filename)
-    te = TestEntry(filename, False, edocumentconfidence, notedocumentconfidence)
     allResults.append(te)
 
 print("analysis")
