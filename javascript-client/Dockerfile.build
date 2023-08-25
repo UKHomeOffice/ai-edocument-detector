@@ -1,0 +1,5 @@
+FROM node:16
+
+WORKDIR /workspace
+EXPOSE 8888
+USER 1000

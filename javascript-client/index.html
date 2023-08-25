@@ -1,0 +1,44 @@
+
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+    <style>
+      .edocument { background-color: darkorange; }
+      .notedocument { background-color: green; }
+    </style>
+  </head>
+  <body onload="load()">
+    <h4>Classify edocument example<hr/></h4>
+    <div id="micro-out-div" style="border: solid 1px black; font-size: 20px; border: solid 2px black; padding: 10px">Choose an image to classify...</div>
+    <input type="file" id="fileUpload" accept="image/*" onclick="" />
+    <div style="width:800px; height:600px;overflow:scroll;border: solid 4px black; margin-top:40px;">
+    <canvas id="myCanvas"></canvas>
+    </div>
+
+    <script src="./index.js"> </script>
+    <script>
+    function load() {
+      var imageLoader = document.getElementById('fileUpload');
+      var c = document.getElementById('myCanvas');
+      var ctx = c.getContext('2d');
+      function handleImage(e){
+          var reader = new FileReader();
+          reader.onload = function(event){
+              var img = new Image();
+              img.onload = function(){
+                  c.width = img.width;
+                  c.height = img.height;
+                  ctx.drawImage(img,0,0);
+              }
+              img.src = event.target.result;
+              classify();
+          }
+          reader.readAsDataURL(e.target.files[0]);     
+      }
+
+      imageLoader.addEventListener('change', handleImage, false);
+    }
+
+    </script>
+  </body>
+</html>
