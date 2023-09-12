@@ -17,14 +17,9 @@ import org.tensorflow.types.*
 import scala.jdk.CollectionConverters.*
 import scala.collection.immutable.HashMap as ScalaHashMap
 
-case class ImageResult(
-  edocumentConfidence :Float,
-  notEDocumentConfidence :Float
-)
-
 object ClassifyScala:
 
-  def classifyImage(modelPath :String, testImagePath :String) :ImageResult =
+  def classifyImage(modelPath :String, testImagePath :String) :Float =
 
     val graph = new Graph()
     val session = new Session(graph)
@@ -55,4 +50,4 @@ object ClassifyScala:
 
     println(predictions)
     val fdb = predictions.get(0).asRawTensor.data.asFloats
-    ImageResult(fdb.getFloat(0), fdb.getFloat(1))
+    fdb.getFloat(0)
